@@ -1,4 +1,4 @@
-
+#!/usr/bin/python
 import os
 import sys
 import getopt
@@ -75,4 +75,9 @@ if __name__ == "__main__":
     root.withdraw()
     dirname = tkFileDialog.askdirectory(initialdir="/",  title='Choisi le dossier de ta playlist')
 
-    generate_list(name='test', path=dirname, sort=True, walk=True)
+    playlistName = os.path.split(os.path.abspath(dirname))[1] + '.m3u'
+    m3ufile = os.path.join(dirname, playlistName)
+
+    print playlistName
+    print m3ufile
+    generate_list(name=m3ufile, path=dirname, sort=True, walk=True)
