@@ -16,6 +16,8 @@ def generate_list(name="songs_list.m3u", path=".",
 
     and in the given path """
 
+    n = 0
+
     fp = None
     try:
         try:
@@ -59,9 +61,14 @@ def generate_list(name="songs_list.m3u", path=".",
                 else:
                     fp.write(RECORD_MARKER + ":" + str(track_length) + "," +\
                              os.path.basename(track)[:-4] + "\n")
-
+                
                 # write the fullpath
-                fp.write(track + "\n")
+                #print track.split(os.sep)[4:]
+                #print os.sep.join(track.split(os.sep)[4:])
+                newpath = os.sep.join(track.split(os.sep)[4:])
+                fp.write('.' + os.sep + newpath + "\n")
+                print str(n)+'\n'
+                n += 1
                 
         except (OSError, IOError), e:
             print e
@@ -81,3 +88,5 @@ if __name__ == "__main__":
     print playlistName
     print m3ufile
     generate_list(name=m3ufile, path=dirname, sort=True, walk=True)
+
+    print "fini, enjoy!!"
